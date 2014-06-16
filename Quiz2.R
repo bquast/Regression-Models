@@ -17,9 +17,11 @@ sqrt(res.var)
 
 # Question 3
 data(mtcars)
+attach(mtcars)
 fit <- lm(mpg ~ wt, mtcars)
 summary(fit)
-attributes(summary(fit))
+exp <- fit$coefficients[1] + mean(wt) * fit$coefficients[2]
+exp - 2 * 0.5591
 
 # Question 4
 ?mtcars
@@ -30,4 +32,12 @@ fit[[1]][1] + 3 * fit[[1]][2]
 
 # Question 6
 summary(fit)
-2 * fit[[1]][2]
+2 * (fit$coefficients[2] - 2 * 0.5591)
+
+# Question 9
+attributes(fit)
+w.c <- fit$residuals ^ 2
+fit.c <- lm(mpg ~ 1, mtcars)
+fit.c.res <- fit.c$residuals ^ 2
+sum(fit.c.res)
+sum(w.c) /sum(fit.c.res)
